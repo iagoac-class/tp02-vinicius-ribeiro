@@ -247,7 +247,7 @@ int main(int argc, char* argv[]) {
     double tempo_balanceada = arvore_balanceada(instancia_num);
 
     
-    printf("%f\n", tempo_n_balanceada);
+    printf("%f\n%f\n", tempo_n_balanceada, tempo_balanceada);
 
     return (1);
 }
