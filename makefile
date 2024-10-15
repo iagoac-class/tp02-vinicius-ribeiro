@@ -6,9 +6,6 @@ PROJ_NAME=arvores
 # Arquivos .c
 C_SOURCE=$(wildcard *.c)
 
-# Arquivos .h
-H_SOURCE=$(wildcard *.h)
-
 # Arquivos objeto
 OBJ=$(C_SOURCE:.c=.o)
 
@@ -29,10 +26,7 @@ all: $(PROJ_NAME)
 $(PROJ_NAME): $(OBJ)
 	$(CC) -o $@ $^
 
-%.o: %.c %.h
-	$(CC) -o $@ $< $(CC_FLAGS)
-
-main.o: main.c $(H_SOURCE)
+%.o: %.c
 	$(CC) -o $@ $< $(CC_FLAGS)
 
 clean:

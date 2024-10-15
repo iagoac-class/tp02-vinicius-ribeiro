@@ -25,6 +25,15 @@ nodeTreeBT *removeNo(nodeTreeBT *root, int data);
 void processaEntradas(nodeTreeBT **root, const char *filename);
 
 double arvore_binaria(int instancia_num);
-// double arvore_balanceada(int instancia_num); //
+double arvore_balanceada(int instancia_num);
+
+typedef struct noAVL_{
+    int valor;
+    int altura;
+    struct noAVL_ *esq, *dir;
+} noAVL;
+
+void manip_AVL(noAVL *raiz, const char *caminho);
+void libera_AVL(noAVL *raiz);
 
 #endif // _H_ARVORES

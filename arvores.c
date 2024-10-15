@@ -218,15 +218,21 @@ double arvore_binaria(int instancia_num) {
 }
 
 double arvore_balanceada(int instancia_num) {
+    noAVL *raiz = NULL;
     double tempo = 0;
+
+    char filename[50];
+    sprintf(filename, "instancias/%d", instancia_num); // Cria o nome do arquivo baseado na instância
+    
     clock_t begin = clock();
 
+    manip_AVL(raiz, filename);
 
-    
     clock_t end = clock();
     // calcula o tempo decorrido encontrando a diferença (end - begin) e
     // dividindo a diferença por CLOCKS_PER_SEC para converter em segundos
     tempo += (double)(end - begin) / CLOCKS_PER_SEC;
+    if(raiz) libera_AVL(raiz);
     return (tempo);
 }
 
