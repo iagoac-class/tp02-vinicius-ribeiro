@@ -22,7 +22,7 @@ nodeTreeBT *search(nodeTreeBT *root, int data);
 nodeTreeBT *buscaPai(nodeTreeBT* root, nodeTreeBT* node);
 nodeTreeBT *removeRaiz(nodeTreeBT* root);
 nodeTreeBT *removeNo(nodeTreeBT *root, int data);
-void processaEntradas(nodeTreeBT **root, const char *filename);
+void processaEntradas(nodeTreeBT **root, FILE *arq);
 
 double arvore_binaria(int instancia_num);
 double arvore_balanceada(int instancia_num);
@@ -33,7 +33,7 @@ typedef struct noAVL_{
     struct noAVL_ *esq, *dir;
 } noAVL;
 
-void manip_AVL(noAVL *raiz, const char *caminho);
+void manip_AVL(noAVL *raiz, FILE *arq);
 void libera_AVL(noAVL *raiz);
 
 #endif // _H_ARVORES

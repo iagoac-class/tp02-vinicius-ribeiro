@@ -162,20 +162,13 @@ nodeTreeBT *removeNo(nodeTreeBT *root, int data){
 
 // Função para ler as entradas e processar a inserção e removeção na árvore não balanceada 
 
-void processaEntradas(nodeTreeBT **root, const char *filename){   
+void processaEntradas(nodeTreeBT **root, FILE *arq){   
     char operacao;           // Para armazenar a operação (I ou R)
     int valor;              // Para armazenar o valor a ser inserido ou removido
 
-    // Abre o arquivo para leitura
-    FILE *file = fopen(filename, "r"); // O arquivo será aberto apenas para leitura, pois o argumento 'r'
-    if (file == NULL) {
-        puts("Erro ao abrir o arquivo");
-        return; // Retorna se houver erro ao abrir o arquivo
-    }
-
     // Leitura das entradas até o fim 
     // Utilizando um loop para leitura das operações de entrada até o fim do arquivo (EOF, que é o End of File (Fim de Arquivo, em português) ). "
-    while (fscanf(file, " %c %d", &operacao, &valor) != EOF) {
+    while (fscanf(arq, " %c %d", &operacao, &valor) != EOF) {
         if (operacao == 'I') {
             // Chama a função de inserção quando a operação for 'I'
             *root = insert(*root, valor);
@@ -190,7 +183,6 @@ void processaEntradas(nodeTreeBT **root, const char *filename){
         }
 
     }
-    fclose(file);
 }    
 
 // Códigos disponibilizados //
@@ -203,13 +195,22 @@ double arvore_binaria(int instancia_num) {
     char filename[50];
     sprintf(filename, "instancias/%d", instancia_num); // Cria o nome do arquivo baseado na instância
 
+    // Abre o arquivo para leitura
+    FILE *arq = fopen(filename, "r"); // O arquivo será aberto apenas para leitura, pois o argumento 'r'
+    if (arq == NULL) {
+        puts("Erro ao abrir o arquivo");
+        return; // Retorna se houver erro ao abrir o arquivo
+    }
+
     // Iniciando a medição do tempo
     clock_t begin = clock();
 
-    processaEntradas(&root, filename); // Chamando a função para manipular a árvore
+    processaEntradas(&root, arq); // Chamando a função para manipular a árvore
 
     // Finalizando a medição tempo
     clock_t end = clock();
+
+    fclose(arq);
 
     // calcula o tempo decorrido encontrando a diferença (end - begin) e
     // dividindo a diferença por CLOCKS_PER_SEC para converter em segundos
@@ -224,11 +225,21 @@ double arvore_balanceada(int instancia_num) {
     char filename[50];
     sprintf(filename, "instancias/%d", instancia_num); // Cria o nome do arquivo baseado na instância
     
+    // Abre o arquivo para leitura
+    FILE *arq = fopen(filename, "r"); // O arquivo será aberto apenas para leitura, pois o argumento 'r'
+    if (arq == NULL) {
+        puts("Erro ao abrir o arquivo");
+        return; // Retorna se houver erro ao abrir o arquivo
+    }
+    
     clock_t begin = clock();
 
-    manip_AVL(raiz, filename);
+    manip_AVL(raiz, arq);
 
     clock_t end = clock();
+
+    fclose(arq);
+
     // calcula o tempo decorrido encontrando a diferença (end - begin) e
     // dividindo a diferença por CLOCKS_PER_SEC para converter em segundos
     tempo += (double)(end - begin) / CLOCKS_PER_SEC;

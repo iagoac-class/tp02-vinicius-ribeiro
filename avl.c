@@ -245,18 +245,10 @@ noAVL *remove_AVL(noAVL *raiz, int item)
     return (raiz);
 }
 
-void manip_AVL(noAVL *raiz, const char *caminho)
+void manip_AVL(noAVL *raiz, FILE *arq)
 {
     char operacao;
     int valor;
-    FILE *arq = fopen(caminho, "r");
-
-    if(!arq) 
-    {
-        puts("Erro na abertura do arquivo.");
-        return;
-        /*Retorna caso o arquivo não possa ser aberto.*/
-    }
 
     while(fscanf(arq, "%c %d", &operacao, &valor) != EOF)
     {
@@ -267,11 +259,10 @@ void manip_AVL(noAVL *raiz, const char *caminho)
             case 'I':
             raiz = insere_AVL(raiz, valor);
             break;
-
+            
             case 'R':
             raiz = remove_AVL(raiz, valor);
             break;
         }
     }
-    fclose(arq);
 }
